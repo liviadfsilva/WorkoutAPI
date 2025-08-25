@@ -1,10 +1,10 @@
 services:
   app:
     build: ./
-    image: local/workout-api:dev
+    image: local/workoutapi:dev
     pull_policy: never
     volumes:
-      - .:/workout-api
+      - .:/workoutapi
     environment:
       ENV: ${ENV}
       DATABASE_URL: ${DATABASE_URL}
@@ -13,8 +13,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: sh -c "
-      pip install -r requirements.txt
-      && uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+      pip install -r requirements.txt &&
+      uvicorn main:app --host 0.0.0.0 --port 8000 --reload
       "
     stop_signal: SIGINT
     tty: true
