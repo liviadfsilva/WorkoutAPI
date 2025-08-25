@@ -14,7 +14,6 @@ services:
       - "host.docker.internal:host-gateway"
     command: sh -c "
       pip install -r requirements.txt
-      && alembic upgrade head
       && uvicorn main:app --host 0.0.0.0 --port 8000 --reload
       "
     stop_signal: SIGINT
