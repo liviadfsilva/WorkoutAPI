@@ -1,0 +1,33 @@
+services:
+  app:
+    build: ./
+    image: local/workout-api:dev
+    pull_policy: never
+    volumes:
+      - .:/workout-api
+    environment:
+      ENV: ${ENV}
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: sh -c "
+      pip install -r requirements.txt
+      && alembic upgrade head
+      && uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+      "
+    stop_signal: SIGINT
+    tty: true
+    stdin_open: true
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
