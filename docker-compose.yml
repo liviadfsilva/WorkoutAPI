@@ -1,7 +1,7 @@
 services:
   app:
     build: ./
-    image: local/workoutapi:dev
+    image: local/workoutapi
     pull_policy: never
     volumes:
       - .:/workoutapi
