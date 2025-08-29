@@ -1,6 +1,7 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.core.models import BaseModel
+from app.athletes.models import Athlete
 
 class Category(BaseModel):
     __tablename__ = "categories"
@@ -8,4 +9,4 @@ class Category(BaseModel):
     pk_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     
-    athlete: Mapped["Athlete"] = relationship(back_populates="category")
+    athlete: Mapped["Athlete"] = relationship("Athlete", back_populates="category")
