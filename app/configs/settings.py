@@ -2,6 +2,10 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = Field(dafault="postgresql+asyncpg://postgres:postgres@postgres:5432/workoutapi")
+    DATABASE_URL: str
+    
+    class Config:
+        env_file = ".env"
+        extra = "ignore"
 
 settings = Settings()
