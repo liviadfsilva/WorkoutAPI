@@ -1,6 +1,6 @@
-from pydantic import BaseModel, UUID4
+from pydantic import BaseModel, UUID4, Field
 from datetime import datetime
-from typing import Annotated, Field
+from typing import Annotated
 
 class BaseSchema(BaseModel):
     class Config:
